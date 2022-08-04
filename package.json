@@ -1,0 +1,23 @@
+{
+  "name": "zefhub",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "repository": "git@github.com:zefhub/zefhub-cli.git",
+  "author": "Daniel Dyrnes <daniel@zefhub.io>",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "build": "yarn run tsc",
+    "prestart": "yarn run tsc",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "chalk": "4.1.2",
+    "commander": "^9.4.0",
+    "conf": "^10.2.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.3"
+  }
+}
