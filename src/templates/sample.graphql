@@ -1,4 +1,5 @@
 # Zef.SchemaVersion: v1
+# Zef.DataTag: test-sgql
 # Zef.Authentication: {"Algo": "HS256", "VerificationKey": "xxxxxxxx", "Header": "X-Auth-Token"}
 
 type User @hook(onCreate: "userCreate") {
