@@ -2,6 +2,7 @@ import { createReadStream, existsSync, readFileSync } from "fs";
 import chalk from "chalk";
 import axios from "axios";
 import FormData from "form-data";
+import config from "../config";
 import { zipFiles, FileBuffer } from "../utils/compression";
 import { checkAuth } from "../utils/auth";
 
@@ -10,7 +11,7 @@ const up = async () => {
     console.log(chalk.green("Deploying project..."));
     let uplaodQueue: FileBuffer[] = [];
 
-    await checkAuth();
+    const user = await checkAuth();
 
     if (existsSync("schema.graphql")) {
       const data = await readFileSync("schema.graphql");
@@ -41,22 +42,21 @@ const up = async () => {
     console.log(chalk.green("Zipping files"));
 
     // Upload files
-    // console.log(chalk.green("Uploading files..."));
     console.log(chalk.green("Deploying service..."));
     const form = new FormData();
     form.append("file", createReadStream(zipPath));
     const uploadResponse = await axios.post(
-      "http://localhost:8080/v1/deployment/up",
+      `${config.host}/v1/deployment/up`,
       form,
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${process.env.ZEFHUB_AUTH_KEY}`,
+          // Authorization: `Bearer TODO`,
+          "X-Api-Key": user?.apiKey || "",
         },
       }
     );
     if (uploadResponse.status === 200) {
-      // console.log(chalk.green("Upload successful!"));
       console.log(chalk.green("Deployment successful!"));
       console.log(
         chalk.green("GraphQL URL: " + uploadResponse.data.service.uri + "/gql")
@@ -65,7 +65,7 @@ const up = async () => {
       throw new Error("Upload failed");
     }
   } catch (err) {
-    console.error(err);
+    console.error(chalk.red("Deployment failed"));
   }
 };
 
