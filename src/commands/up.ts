@@ -41,7 +41,8 @@ const up = async () => {
     console.log(chalk.green("Zipping files"));
 
     // Upload files
-    console.log(chalk.green("Uploading files..."));
+    // console.log(chalk.green("Uploading files..."));
+    console.log(chalk.green("Deploying service..."));
     const form = new FormData();
     form.append("file", createReadStream(zipPath));
     const uploadResponse = await axios.post(
@@ -55,7 +56,11 @@ const up = async () => {
       }
     );
     if (uploadResponse.status === 200) {
-      console.log(chalk.green("Upload successful!"));
+      // console.log(chalk.green("Upload successful!"));
+      console.log(chalk.green("Deployment successful!"));
+      console.log(
+        chalk.green("GraphQL URL: " + uploadResponse.data.service.uri + "/gql")
+      );
     } else {
       throw new Error("Upload failed");
     }
