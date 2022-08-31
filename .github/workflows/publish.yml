@@ -1,0 +1,38 @@
+name: Publish Package
+on:
+  release:
+    types: [created]
+jobs:
+  #publish-to-npmjs:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v3
+  #    # Setup .npmrc file to publish to npm
+  #    - uses: actions/setup-node@v3
+  #      with:
+  #        node-version: "16.x"
+  #        registry-url: "https://registry.npmjs.org"
+  #        # Defaults to the user or organization that owns the workflow file
+  #        scope: "@zefhub"
+  #    - run: yarn build
+  #    - run: yarn publish
+  #      env:
+  #        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-to-github:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: "https://npm.pkg.github.com"
+          # Defaults to the user or organization that owns the workflow file
+          scope: "@zefhub"
+      - run: yarn build
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
