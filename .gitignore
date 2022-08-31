@@ -8,6 +8,8 @@ lib-cov
 *.pid
 *.gz
 *.swp
+hooks.py
+schema.graphql
 
 pids
 logs
