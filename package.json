@@ -26,6 +26,7 @@
   "devDependencies": {
     "@types/archiver": "^5.3.1",
     "@types/cli-interact": "^0.1.1",
-    "@types/node": "^18.6.3"
+    "@types/node": "^18.6.3",
+    "tsc": "^2.0.4"
   }
 }
