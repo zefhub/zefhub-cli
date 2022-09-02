@@ -17,6 +17,7 @@
 const graphql = `# GraphQL schema generated with zefhub cli.
 # Zef.SchemaVersion: v1
 # Zef.Authentication: {"Algo": "HS256", "VerificationKey": "xxxxxxxx", "Audience": "example.com", "Header": "X-Auth-Token"}
+# Zef.DataTag: test-sgql
 
 type User @hook(onCreate: "userCreate") {
   name: String!
