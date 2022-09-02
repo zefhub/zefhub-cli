@@ -1,16 +1,35 @@
 {
   "name": "zefhub",
-  "version": "0.0.1",
-  "main": "build/index.js",
+  "version": "0.0.3",
+  "main": "dist/index.js",
+  "bin": {
+    "zefhub": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "zef",
+    "zefhub",
+    "graphql"
+  ],
   "repository": "git@github.com:zefhub/zefhub-cli.git",
   "author": "Daniel Dyrnes <daniel@zefhub.io>",
+  "homepage": "https://www.zefhub.io",
+  "bugs": {
+    "url": "https://github.com/zefhub/zefhub-cli/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
     "build": "yarn run tsc",
     "prestart": "yarn run build",
-    "start": "node build/index.js",
-    "copy:templates": "cp -r src/templates build/templates"
+    "start": "node dist/index.js",
+    "copy:templates": "cp -r src/templates dist/templates",
+    "clean": "node tools/cleanup"
   },
   "dependencies": {
     "archiver": "^5.3.1",

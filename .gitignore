@@ -19,6 +19,7 @@ tmp
 # Build
 public/css/main.css
 build/
+dist/
 
 # Coverage reports
 coverage

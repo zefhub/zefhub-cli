@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Copyright 2022 Synchronous Technologies Pte Ltd
  *
