@@ -19,6 +19,7 @@
 import { Command } from "commander";
 import init from "./commands/init";
 import up from "./commands/up";
+import deploy from "./commands/deploy";
 import list from "./commands/list";
 
 const program = new Command();
@@ -26,6 +27,8 @@ const program = new Command();
 program.name("zefhub").description("Zefhub CLI").version("0.0.1");
 
 program.command("init").description("initialize a new project").action(init);
+
+program.command("deploy").description("deploy project").action(deploy);
 
 program.command("up").description("deploy the project to zefhub").action(up);
 
