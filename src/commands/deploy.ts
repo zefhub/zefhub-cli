@@ -70,6 +70,7 @@ const deploy = async () => {
           // Authorization: `Bearer TODO`,
           "X-Api-Key": user?.apiKey || "",
         },
+        timeout: 1000 * 60 * 5,
       }
     );
     console.log(uploadResponse);
@@ -81,6 +82,9 @@ const deploy = async () => {
     }
   } catch (err) {
     console.error(chalk.red("Deployment failed"));
+    if (config.mode === "development") {
+      console.error(err);
+    }
   }
 };
 
