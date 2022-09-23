@@ -24,7 +24,7 @@ import list from "./commands/list";
 
 const program = new Command();
 
-program.name("zefhub").description("Zefhub CLI").version("0.0.1");
+program.name("zefhub").description("ZefHub CLI").version("0.0.1");
 
 program.command("init").description("initialize a new project").action(init);
 
