@@ -1,6 +1,6 @@
 {
   "name": "zefhub",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "main": "dist/index.js",
   "bin": {
     "zefhub": "dist/index.js"
