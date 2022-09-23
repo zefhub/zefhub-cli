@@ -1,6 +1,8 @@
 # Zef.SchemaVersion: v1
-# Zef.Authentication: {"Algo": "HS256", "VerificationKey": "xxxxxxxx", "Audience": "example.com", "Header": "X-Auth-Token"}
+# #Zef.Authentication: {"Algo": "HS256", "VerificationKey": "xxxxxxxx", "Audience": "example.com", "Header": "X-Auth-Token"}
 # Zef.DataTag: test-sgql
+# Zef.GraphQLRoute: {"route": "/gql"}
+# Zef.GraphQLRoute: {"route": "/*/gql"}
 
 type User @hook(onCreate: "userCreate") {
   name: String!
