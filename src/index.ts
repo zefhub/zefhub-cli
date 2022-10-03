@@ -21,6 +21,7 @@ import init from "./commands/init";
 import up from "./commands/up";
 import deploy from "./commands/deploy";
 import list from "./commands/list";
+import logs from "./commands/logs";
 
 const program = new Command();
 
@@ -46,5 +47,7 @@ program
     "will list all services deployed to ZefHub by the current user"
   )
   .action(list);
+
+program.command("logs").description("get logs for a service").action(logs);
 
 program.parse();
