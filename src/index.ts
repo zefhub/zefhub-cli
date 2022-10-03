@@ -25,7 +25,7 @@ import logs from "./commands/logs";
 
 const program = new Command();
 
-program.name("zefhub").description("ZefHub CLI").version("0.0.1");
+program.name("zefhub").description("ZefHub CLI").version("0.0.10");
 
 program.command("init").description("initialize a new project").action(init);
 
