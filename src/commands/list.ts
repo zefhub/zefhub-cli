@@ -22,24 +22,37 @@ import { checkAuth } from "../utils/auth";
 const list = async () => {
   const user = await checkAuth();
 
-  const listResponse = await axios.get(
-    `${config.host}/v1/deployment/{service}/revisions`,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        // Authorization: `Bearer TODO`,
-        "X-Api-Key": user?.apiKey || "",
-      },
-    }
-  );
+  const listResponse = await axios.get(`${config.host}/v1/services`, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      // Authorization: `Bearer TODO`,
+      "X-Api-Key": user?.apiKey || "",
+    },
+  });
   if (listResponse.status === 200) {
-    if (listResponse.data.revisions) {
-      listResponse.data.revisions.forEach((revision: any, index: number) => {
-        const revId = revision.revisionId.split("/").pop();
-        console.log(chalk.green(`${index + 1}: ${revId}`));
+    if (config.mode === "development") {
+      console.log("listResponse.data", listResponse.data);
+    }
+    if (listResponse.data.length !== 0) {
+      console.log(chalk.green(`Your services:`));
+      console.log(chalk.green("=============="));
+      listResponse.data.forEach((service: any, index: number) => {
+        console.log(chalk.green(`Name: ${service.name}`));
+        console.log(
+          chalk.green(`Status: `) +
+            `${
+              service.status.availableReplicas === 1
+                ? chalk.green("ready")
+                : chalk.red("not ready")
+            }`
+        );
+        console.log(chalk.green(`Generation: ${service.generation}`));
+        console.log(chalk.green(`Created at: ${service.createdAt}`));
+        console.log(chalk.green(`URL: ${service.url}`));
+        console.log(chalk.green("=============="));
       });
     } else {
-      console.log(chalk.blue("No revisions found"));
+      console.log(chalk.blue("No services found"));
     }
   } else {
     throw new Error("List failed");

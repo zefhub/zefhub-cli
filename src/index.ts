@@ -28,10 +28,23 @@ program.name("zefhub").description("ZefHub CLI").version("0.0.1");
 
 program.command("init").description("initialize a new project").action(init);
 
-program.command("deploy").description("deploy project").action(deploy);
+program
+  .command("deploy")
+  .description("deploy project to zefhub")
+  .action(deploy);
 
-program.command("up").description("deploy the project to zefhub").action(up);
+program
+  .command("up")
+  .description("(DEPRICATED) deploy the project to zefhub")
+  .action(up);
 
-program.command("list").description("list all service revisions").action(list);
+program
+  .command("list")
+  .description("list all services")
+  .addHelpText(
+    "after",
+    "will list all services deployed to ZefHub by the current user"
+  )
+  .action(list);
 
 program.parse();
