@@ -22,15 +22,16 @@ import config from "../config";
 import { zipFiles, FileBuffer } from "../utils/compression";
 import { checkAuth } from "../utils/auth";
 
-const deploy = async () => {
+const deploy = async (options: { schema?: string; hooks?: string }) => {
   try {
     console.log(chalk.green("Deploying project..."));
     let uplaodQueue: FileBuffer[] = [];
 
     const user = await checkAuth();
 
-    if (existsSync("schema.graphql")) {
-      const data = await readFileSync("schema.graphql");
+    const schemaPath = options.schema || "schema.graphql";
+    if (existsSync(schemaPath)) {
+      const data = await readFileSync(schemaPath);
       uplaodQueue.push({
         name: "schema.graphql",
         type: "graphql",
@@ -38,8 +39,10 @@ const deploy = async () => {
       });
       console.log(chalk.green("Found file: schema.graphql"));
     }
-    if (existsSync("hooks.py")) {
-      const data = await readFileSync("hooks.py");
+
+    const hooksPath = options.hooks || "hooks.py";
+    if (existsSync(hooksPath)) {
+      const data = await readFileSync(hooksPath);
       uplaodQueue.push({
         name: "hooks.py",
         type: "hooks",
@@ -82,9 +85,9 @@ const deploy = async () => {
     }
   } catch (err) {
     console.error(chalk.red("Deployment failed"));
-    if (config.mode === "development") {
-      console.error(err);
-    }
+    console.error(chalk.red("====================================="));
+    console.error(chalk.red(err));
+    console.error(chalk.red("====================================="));
   }
 };
 

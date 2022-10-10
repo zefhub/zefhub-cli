@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { Command } from "commander";
+import { Command, Option } from "commander";
 import init from "./commands/init";
 import up from "./commands/up";
 import deploy from "./commands/deploy";
@@ -32,6 +32,14 @@ program.command("init").description("initialize a new project").action(init);
 program
   .command("deploy")
   .description("deploy project to zefhub")
+  .addOption(
+    new Option("--schema [path]", "path to schema file").preset(
+      "schema.graphql"
+    )
+  )
+  .addOption(
+    new Option("--hooks [path]", "path to hooks file").preset("hooks.py")
+  )
   .action(deploy);
 
 program
@@ -50,4 +58,4 @@ program
 
 program.command("logs").description("get logs for a service").action(logs);
 
-program.parse();
+program.parse(process.argv);
