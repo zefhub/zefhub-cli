@@ -27,9 +27,14 @@ const program = new Command();
 
 program.name("zefhub").description("ZefHub CLI").version("0.0.10");
 
-program.command("init").description("initialize a new project").action(init);
+const easygraphql = program.command("easygraphql");
 
-program
+easygraphql
+  .command("init")
+  .description("initialize a new project")
+  .action(init);
+
+easygraphql
   .command("deploy")
   .description("deploy project to zefhub")
   .addOption(
@@ -42,12 +47,12 @@ program
   )
   .action(deploy);
 
-program
+easygraphql
   .command("up")
   .description("(DEPRICATED) deploy the project to zefhub")
   .action(up);
 
-program
+easygraphql
   .command("list")
   .description("list all services")
   .addHelpText(
@@ -56,6 +61,6 @@ program
   )
   .action(list);
 
-program.command("logs").description("get logs for a service").action(logs);
+easygraphql.command("logs").description("get logs for a service").action(logs);
 
 program.parse(process.argv);
