@@ -22,6 +22,9 @@ import up from "./commands/up";
 import deploy from "./commands/deploy";
 import list from "./commands/list";
 import logs from "./commands/logs";
+import start from "./commands/start";
+import stop from "./commands/stop";
+import del from "./commands/delete";
 
 const program = new Command();
 
@@ -62,5 +65,11 @@ easygraphql
   .action(list);
 
 easygraphql.command("logs").description("get logs for a service").action(logs);
+
+easygraphql.command("start").description("start a service").action(start);
+
+easygraphql.command("stop").description("stop a service").action(stop);
+
+easygraphql.command("delete").description("delete a service").action(del);
 
 program.parse(process.argv);
